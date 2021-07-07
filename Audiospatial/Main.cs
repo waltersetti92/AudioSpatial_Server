@@ -39,8 +39,12 @@ namespace Audiospatial
         public int ripetiz = 0;
         ResumeFromMessage message_callback = null;
         public Speakers speakers = null;
+        public string activity_form;
+        public string idle_status;
         public Main()
         {
+            idle_status = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1&k=0";
+            Business_Logic BL = new Business_Logic(this);
             onactivity = 1;
             messaggio = 1;
             scenario = 1;
@@ -94,7 +98,44 @@ namespace Audiospatial
                 return (Activities)serializer.Deserialize(file, typeof(Activities));
             }
         }
+        public string Status_Changed(string k)
+        {
+            this.BeginInvoke((Action)delegate ()
+            {
+                int status = int.Parse(k);
+                if (status == 6)
+                {
+                    onStart1(activity_form);
+                }
+                if (status == 8)
+                {
+                }
+                if (status == 9)
+                {
 
+
+                }
+                if (status == 11 || status == 12)
+                {
+
+                    Application.Exit();
+                    Environment.Exit(0);
+
+                }
+                if (status == 15)
+                {
+
+                }
+
+            });
+            return k;
+        }
+
+        public async void Abort_UDA()
+        {
+            await uda_server_communication.Server_Request(idle_status);
+            Application.Restart();
+        }
         public void piu_partecipanti()
 
         {
@@ -150,13 +191,18 @@ namespace Audiospatial
             }
 
         }
-
-        public void onStart()
+        public void onStart1(string k)
         {
             initial1.Visible = false;
             activityUdaUC1.Visible = true;
             currUC = activityUdaUC1;
         }
+        //public void onStart()
+        //{
+        //    initial1.Visible = false;
+        //    activityUdaUC1.Visible = true;
+        //    currUC = activityUdaUC1;
+        //}
         private void Main_Load(object sender, EventArgs e)
         {
             Size size = this.Size; //commit
