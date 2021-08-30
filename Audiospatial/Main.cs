@@ -41,9 +41,12 @@ namespace Audiospatial
         public Speakers speakers = null;
         public string activity_form;
         public string idle_status;
+        public string started_uda;
+        public string data_start;
         public Main()
         {
             idle_status = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1&k=0";
+            started_uda = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1&k=7" + "&data=" + data_start;
             Business_Logic BL = new Business_Logic(this);
             onactivity = 1;
             messaggio = 1;

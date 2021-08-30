@@ -25,8 +25,6 @@ namespace Audiospatial
     class Business_Logic
     {
         private Main mn;
-        //private Activity ac;
-        //private Interaction ic;
         public string save_status;
         private static System.Timers.Timer aTimer;
         public int counter_timer;
@@ -45,6 +43,10 @@ namespace Audiospatial
             try
             {
                 string uda_status = await uda_server_communication.Server_Request(get_status_uda); //stato dell'UDA ottenuto con la classe UDA_server_communication
+                if (string.Equals(uda_status, "6"))
+                {
+                    mn.data_start = await uda_server_communication.Server_Request_started(get_status_uda);
+                }
                 if (counter_timer == 0) // salvo lo stato dell'UDA al tempo t=0 e la prima volta che cambia
                 {
                     save_status = uda_status;
@@ -81,10 +83,10 @@ namespace Audiospatial
             int ik1 = ik + 1;
             if (ik >= 0 && ik < 20)
             {
-                if (ik == 6 || ik == 11 || ik == 8)
+                if (ik == 11 || ik == 8)
                     return "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1" + "&k=" + ik1.ToString();
-
-
+                else if (ik == 6)
+                    return "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1" + "&k=" + ik1.ToString() + "&data=" + mn.data_start;
                 else
                     return "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1" + "&k=" + ik.ToString();
             }
