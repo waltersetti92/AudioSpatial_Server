@@ -108,7 +108,9 @@ namespace Audiospatial
                 int status = int.Parse(k);
                 if (status == 6)
                 {
-                    onStart1(activity_form);
+                    initial1.Visible = false;
+                    onStartActivity(2,0,6,"1");
+                    //onStart1(activity_form);
                 }
                 if (status == 8)
                 {

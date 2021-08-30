@@ -57,7 +57,6 @@ namespace Audiospatial
             this.Visible = false;
             participants = cmbParticipants.SelectedIndex + 1;
             difficulty = ((ComboBoxItem)cmbDifficulty.SelectedItem).Value;
-
             parentForm.onStartActivity(((ComboBoxItem)cmbDifficulty.SelectedItem).Value, 0, cmbParticipants.SelectedIndex + 1, "1");
         }
 
