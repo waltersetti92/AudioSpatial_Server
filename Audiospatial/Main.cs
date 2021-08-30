@@ -110,7 +110,6 @@ namespace Audiospatial
                 {
                     initial1.Visible = false;
                     onStartActivity(2,0,6,"1");
-                    //onStart1(activity_form);
                 }
                 if (status == 8)
                 {
@@ -135,6 +134,7 @@ namespace Audiospatial
             });
             return k;
         }
+
 
         public async void Abort_UDA()
         {
@@ -229,7 +229,7 @@ namespace Audiospatial
             if (onactivity==1)
             {
                 activityUdaUC1.Visible = false;
-               BackgroundImageLayout = ImageLayout.Stretch;
+                BackgroundImageLayout = ImageLayout.Stretch;
                 BackgroundImage = Image.FromFile(resourcesPath1 + "\\" + background_image_stanza);
                 speakers.sound_speaker = "13 09 ";
                 speakers.sound_time = " 09 ";
@@ -345,7 +345,6 @@ namespace Audiospatial
             answerUC1.Visible = false;
             if (activity.isCorrect(Int32.Parse(result))) playbackResourceAudio("success");
             else playbackResourceAudio("failure");
-
             Thread.Sleep(2000);
             activity.nextOperand();
             currUC = activity_Stanza1;

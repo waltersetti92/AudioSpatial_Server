@@ -14,9 +14,29 @@ namespace Audiospatial
     {
         public Main parentForm { get; set; }
         private int iDifficulty = 0;
+        public string k;
+        public string put_wait_data;
         public AnswerUC()
         {
             InitializeComponent();
+            put_wait_data = "https://www.sagosoft.it/_API_/cpim/luda/www/luda_20210111_1500//api/uda/put/?i=1&k=14" + "&data=" + "{\"answer\": \"Inserisci il risultato corretto\", \"input_type\":\"\"}";
+        }
+        private async void answer_wait()
+        {
+            while (true)
+            {
+                k = parentForm.Status_Changed(parentForm.activity_form);
+                int status = int.Parse(k);
+                if (status != 9 && status != 8)
+                {
+                    if (status == 11 || status == 12)
+                    {
+                        Application.Exit();
+                        Environment.Exit(0);
+                    }
+                }
+                break;
+                }
         }
         public void setPos(int w, int h)
         {
